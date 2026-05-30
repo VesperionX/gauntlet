@@ -1,0 +1,4 @@
+.cursor/
+.worktrees/
+.audit-flow/
+.DS_Store

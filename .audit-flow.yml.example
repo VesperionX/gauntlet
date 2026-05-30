@@ -1,0 +1,23 @@
+# Optional per-project audit-flow configuration.
+# Copy to .audit-flow.yml in your repo root.
+
+priorities:
+  - security
+  - api-contract
+
+# Paths that require explicit "no issues" rationale if changed
+mandatory_paths:
+  - db/
+  - auth/
+
+forbidden_patterns:
+  - pattern: 'eval\s*\('
+    message: Use safe expression parser instead
+    severity: BLOCKING
+  - pattern: 'fetch\s*\('
+    message: Use the API client in src/api.ts
+    severity: WARNING
+
+# Bias Oracle weighting toward listed priorities
+oracle:
+  downgrade_speculative_blocking: true

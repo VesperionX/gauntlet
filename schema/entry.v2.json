@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "gauntlet/entry.v2.json",
+  "title": "AuditFlowLedgerEntryV2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "audit_id",
+    "timestamp",
+    "diff_source",
+    "commit_diff_hash",
+    "uncommitted_diff_hash",
+    "combined_diff_hash",
+    "files_reviewed",
+    "risk_mode",
+    "verdict",
+    "blocking_issues",
+    "summary",
+    "prev_hash",
+    "entry_hash"
+  ],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "audit_id": { "type": "string", "format": "uuid" },
+    "timestamp": { "type": "string", "format": "date-time" },
+    "diff_source": { "type": "string" },
+    "commit_diff_hash": { "type": "string" },
+    "uncommitted_diff_hash": { "type": "string" },
+    "combined_diff_hash": { "type": "string" },
+    "files_reviewed": { "type": "array", "items": { "type": "string" } },
+    "review_depth": {
+      "type": "object",
+      "additionalProperties": { "enum": ["deep", "standard", "skim", "skip"] }
+    },
+    "risk_mode": { "enum": ["fast", "standard", "deep"] },
+    "verdict": { "enum": ["PASS", "VETO"] },
+    "blocking_issues": { "type": "integer", "minimum": 0 },
+    "summary": { "type": "string" },
+    "cross_cutting_themes": { "type": "array", "items": { "type": "string" } },
+    "challenges": { "type": "array" },
+    "prior_audit_id": { "type": ["string", "null"] },
+    "static_check_findings_count": { "type": "integer" },
+    "graph_summary": { "type": "string" },
+    "limitations": { "type": "string" },
+    "prev_hash": { "type": "string" },
+    "entry_hash": { "type": "string" },
+    "tool_version": { "type": "string" }
+  }
+}
